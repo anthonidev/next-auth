@@ -51,9 +51,7 @@ export const authSlice = createSlice({
         authenticated_ok: (state) => {
             state.isAuthenticated = true
         },
-        no_changes: (state) => {
-            state
-        },
+    
         refresh_ok: (state, action: PayloadAction<AuthState>) => {
             setStoreLocal('access', action.payload.access ? action.payload.access : '');
             state.access = getStoreLocal('access')
@@ -71,7 +69,6 @@ export const {
     loaded_user,
     fail_user,
     authenticated_ok,
-    no_changes,
     refresh_ok,
 } = authSlice.actions
 

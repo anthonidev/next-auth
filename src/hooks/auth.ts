@@ -39,7 +39,7 @@ export const load_user = () => async (dispatch: AppDispatch) => {
     if (getStoreLocal('access')) {
         const config = {
             headers: {
-                'Authorization': `JWT ${getStoreLocal('access')||'default'}`,
+                'Authorization': `JWT ${getStoreLocal('access') || 'default'}`,
                 'Accept': 'application/json'
             }
         };
@@ -77,7 +77,7 @@ export const login = (email: string, password: string) => async (dispatch: AppDi
         if (res.status === 200) {
 
             dispatch(login_ok(res.data));
-            dispatch(setAlert("WELCOME","green"));
+            dispatch(setAlert("WELCOME", "green"));
             try {
                 dispatch(load_user());
 
@@ -87,14 +87,14 @@ export const login = (email: string, password: string) => async (dispatch: AppDi
             dispatch(off_loading());
 
         } else {
-            dispatch(setAlert("Credinciales incorectas","red"));
+            dispatch(setAlert("Credinciales incorectas", "red"));
 
             dispatch(fail_clear());
             dispatch(off_loading());
         }
 
     } catch (err) {
-        dispatch(setAlert("Credinciales incorectas","red"));
+        dispatch(setAlert("Credinciales incorectas", "red"));
 
         dispatch(fail_clear());
         dispatch(off_loading());
@@ -135,4 +135,74 @@ export const refresh = () => async (dispatch: AppDispatch) => {
 }
 
 
+export const signup = (first_name: string, last_name: string, email: string, password: string, re_password: string) => async (dispatch: AppDispatch) => {
+    dispatch(on_loading());
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const body = JSON.stringify({
+        first_name,
+        last_name,
+        email,
+        password,
+        re_password
+    })
+    dispatch(fail_clear());
 
+    try {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/`, body, config);
+
+        if (res.status === 201) {
+            dispatch(setAlert("Te enviamos un correo, por favor activa tu cuenta. Revisa el correo de spam", "green"))
+        } else {
+            dispatch(setAlert('Error al crear cuenta', 'red'));
+        }
+        dispatch(off_loading());
+
+    } catch (err) {
+        dispatch(off_loading());
+        dispatch(setAlert('Error conectando con el servidor, intenta mas tarde.', 'red'));
+    }
+
+
+}
+export const activate = (uid: (string | string[] | undefined), token: (string | string[] | undefined)) => async (dispatch: AppDispatch) => {
+    dispatch(on_loading());
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const body = JSON.stringify({
+        uid,
+        token
+    });
+
+    try {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/activation/`, body, config);
+
+        if (res.status === 204) {
+            dispatch(setAlert("Cuenta activada!", "green"))
+
+        } else {
+            dispatch(setAlert("Error al activar la cuenta", "red"))
+        }
+
+        dispatch(off_loading());
+
+    } catch (err) {
+        dispatch(setAlert("Error al conectar al servidor", "red"))
+
+        dispatch(off_loading());
+
+    }
+}
+
+export const logout = () => (dispatch: AppDispatch) => {
+    dispatch(fail_clear());
+    dispatch(setAlert('Succesfully logged out', 'green'));
+
+
+}

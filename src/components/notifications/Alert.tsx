@@ -119,9 +119,9 @@ const Alert = () => {
     }
 
     return (
-        <Fragment>
+        <React.Fragment>
             {displayAlert()}
-        </Fragment>
+        </React.Fragment>
     )
 }
 

@@ -5,9 +5,8 @@ import { store } from '../app/store';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (<Provider store={store}>
-     <Component {...pageProps} />
+    <Component {...pageProps} />
   </Provider>
   )
 }
