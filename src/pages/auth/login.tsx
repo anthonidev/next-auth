@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { RootState } from '../../app/store';
 import { IFormLogin } from '../../types/interface';
-import { load_user, login } from '../../hooks/auth';
+import { login } from '../../hooks/auth';
+import InputForm from '../../components/form/InputForm';
+import Submit from '../../components/button/Submit';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -24,19 +26,15 @@ const Login = () => {
         e.preventDefault();
         dispatch(login(formData.email, formData.password));
     };
-    // if (typeof window !== 'undefined' && isAuthenticated)
-    //     router.push('/');
+    if (typeof window !== 'undefined' && isAuthenticated)
+        router.push('/');
 
     return (
         <Layout title='Ingresar | ATON' content="Iniciar sesion en aton">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-day-100">
                 <div className="max-w-md w-full space-y-8">
                     <div>
-                        <img
-                            className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                            alt="Workflow"
-                        />
+
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Inicia sesión con tu cuenta</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             O{' '}
@@ -46,37 +44,22 @@ const Login = () => {
                         </p>
                     </div>
                     <form onSubmit={onSubmit} className="mt-8 space-y-6">
-                        <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                    Email address
-                                </label>
-                                <input
-                                    name="email"
-                                    type='text'
-                                    onChange={onChange}
-                                    value={formData.email}
-                                    placeholder="Email"
-                                    required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password" className="sr-only">
-                                    Password
-                                </label>
-                                <input
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Password"
-                                    onChange={onChange}
-                                    value={formData.password}
-                                />
-                            </div>
+                       
+                            <InputForm
+                                name={'email'}
+                                type='text'
+                                onChange={onChange}
+                                value={formData.email}
+                                placeholder="Email"
+                            />
+                            <InputForm
+                                name={'password'}
+                                type='password'
+                                onChange={onChange}
+                                value={formData.password}
+                                placeholder="Password"
+                            />
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -100,25 +83,7 @@ const Login = () => {
                         </div>
 
                         <div>
-                            {
-                                loading ? (<button
-                                    type="submit"
-                                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    xd
-                                </button>) : (
-                                    <button
-                                        type="submit"
-                                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                    >
-                                        {/* <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                      <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                    </span> */}
-                                        Ingresar
-                                    </button>
-                                )
-                            }
-
+                            <Submit loading={loading} text='Ingresar' />
                         </div>
                     </form>
                 </div>

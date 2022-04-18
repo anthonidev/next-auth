@@ -39,7 +39,7 @@ export const load_user = () => async (dispatch: AppDispatch) => {
     if (getStoreLocal('access')) {
         const config = {
             headers: {
-                'Authorization': `JWT ${getStoreLocal('access')}`,
+                'Authorization': `JWT ${getStoreLocal('access')||'default'}`,
                 'Accept': 'application/json'
             }
         };

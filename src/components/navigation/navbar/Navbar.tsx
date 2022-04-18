@@ -11,7 +11,6 @@ const navigation = [
 
 
 const Navbar = () => {
-    console.log("hola");
     
   return (
     <Disclosure as="nav" className="bg-gray-800">

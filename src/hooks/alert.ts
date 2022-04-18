@@ -3,6 +3,5 @@ import { offAlert, onAlert } from "../features/alertSlice";
 
 export const setAlert = (msg: (string | null), type: (string | null), timeout = 5000) => (dispatch: AppDispatch) => {
     dispatch(onAlert({ msg, type }));
-
-    setTimeout(() => dispatch(offAlert()), timeout);
+    return setTimeout(() => dispatch(offAlert()), timeout);
 }

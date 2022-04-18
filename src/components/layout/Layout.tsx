@@ -7,14 +7,13 @@ import Alert from "../notifications/Alert";
 import Navbar from "../navigation/navbar/navbar";
 
 
-const Layout: React.FC<Props> = ({ title, content, children }) => {
+const Layout: React.FC<Props> = ({ title, content ,children} ) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(check_authenticated());
     dispatch(load_user());
     dispatch(refresh());
-
   }, [dispatch]);
 
   return (
@@ -34,8 +33,4 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
 }
 
 
-Layout.defaultProps = {
-  title: 'Auth',
-  content: 'Auth'
-}
 export default Layout

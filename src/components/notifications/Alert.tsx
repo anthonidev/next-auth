@@ -5,10 +5,8 @@ import { RootState } from '../../app/store';
 
 const Alert = () => {
     const alert = useSelector((state: RootState) => state.alert);
-
     const displayAlert = () => {
         if (alert.type !== null) {
-
             switch (alert.type) {
                 case 'green':
                     return (
@@ -115,7 +113,7 @@ const Alert = () => {
 
         } else {
             return (
-                <Fragment></Fragment>
+                <div></div>
             )
         }
     }

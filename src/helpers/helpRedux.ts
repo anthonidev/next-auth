@@ -3,13 +3,9 @@ export const getStoreLocal = (item: string) => {
     if (typeof localStorage !== 'undefined') {
         if (localStorage.getItem(item)) {
             return localStorage.getItem(item);
-        } else {
-            return '';
-
         }
     }
-
-    return '';
+    return null;
 }
 
 export const removeStoreLocal = (item: string) => {
