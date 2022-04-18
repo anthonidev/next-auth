@@ -1,14 +1,14 @@
 import Head from "next/head"
 import { Props } from '../../types/types';
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import { check_authenticated, load_user, refresh } from "../../features/authSlice";
+import { useDispatch} from "react-redux";
+import { check_authenticated, load_user, refresh } from "../../hooks/auth";
+import Alert from "../notifications/Alert";
+import Navbar from "../navigation/navbar/navbar";
 
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
 
   useEffect(() => {
     dispatch(check_authenticated());
@@ -24,14 +24,18 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
         <meta name='description' content={content} />
       </Head>
 
-      <main>{children}</main>
+      <main>
+        <Navbar />
+        {children}
+      </main>
+      <Alert />
     </>
   )
 }
 
 
 Layout.defaultProps = {
-  title: 'Surf',
-  content: 'Surf'
+  title: 'Auth',
+  content: 'Auth'
 }
 export default Layout

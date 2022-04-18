@@ -3,9 +3,9 @@ import Layout from '../../components/layout/Layout'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { load_user, login } from '../../features/authSlice';
 import { RootState } from '../../app/store';
 import { IFormLogin } from '../../types/interface';
+import { load_user, login } from '../../hooks/auth';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -15,17 +15,14 @@ const Login = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);
 
     const [formData, setFormData] = useState<IFormLogin>({
-        email: 'admin@gmail.com',
+        email: 'tonirodriguez110@gmail.com',
         password: '123',
     });
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(formData.email);
         dispatch(login(formData.email, formData.password));
-        dispatch(load_user());
-
     };
     // if (typeof window !== 'undefined' && isAuthenticated)
     //     router.push('/');

@@ -1,11 +1,10 @@
 import type { NextPage } from 'next'
+import Navbar from '../components/navigation/navbar/navbar'
 
 
 const Home: NextPage = () => {
   return (
-    <h1 className="text-3xl font-bold underline text-red-600">
-      Next js Typescript Redux-toolksait Tailwind Axiosa
-    </h1>
+<></>
   )
 }
 
