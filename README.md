@@ -12,7 +12,7 @@ git clone https://github.com/anthonidev/next-auth-template-JWT.git
 _step 2_
 
 ```
-cd template-nextjs-typescript
+cd next-auth-template-JWT
 ```
 _Instalamos las dependencias_
 
