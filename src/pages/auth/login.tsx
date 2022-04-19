@@ -8,6 +8,7 @@ import { IFormLogin } from '../../types/interface';
 import { login } from '../../hooks/auth';
 import InputForm from '../../components/form/InputForm';
 import Submit from '../../components/button/Submit';
+import Link from 'next/link';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Login = () => {
                     </div>
                     <form onSubmit={onSubmit} className="mt-8 space-y-6">
                         <div className="rounded-md shadow-sm -space-y-px">
-                       
+
                             <InputForm
                                 name={'email'}
                                 type='text'
@@ -76,9 +77,11 @@ const Login = () => {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
-                                </a>
+                                <Link href="/auth/reset">
+                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Forgot your password?
+                                    </a>
+                                </Link>
                             </div>
                         </div>
 

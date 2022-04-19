@@ -206,3 +206,55 @@ export const logout = () => (dispatch: AppDispatch) => {
 
 
 }
+
+export const reset_password = (email: string) => async (dispatch: AppDispatch) => {
+    dispatch(on_loading());
+    const body = JSON.stringify({ email });
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/reset_password/`, body, config);
+        if (res.status === 204) {
+            dispatch(setAlert("Te enviamos un correo, revisa tu bandeja", "green"))
+        } else {
+            dispatch(setAlert("El correo no esta registrado", "red"))
+        }
+        dispatch(off_loading());
+    } catch (err) {
+        dispatch(setAlert("Error en el servidor, intente mas tarde", "red"))
+        dispatch(off_loading());
+
+    }
+}
+export const reset_password_confirm = (uid: (string | string[] | undefined), token: (string | string[] | undefined),new_password:string,re_new_password:string) => async (dispatch: AppDispatch) => {
+    dispatch(on_loading());
+    const body = JSON.stringify({
+        uid,
+        token,
+        new_password,
+        re_new_password
+    });
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    if (new_password ===re_new_password){
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/reset_password_confirm/`,body,config)
+
+        if (res.status===204){
+            dispatch(setAlert("Tu clave ha sido cambiada con exito", "green"))
+        }else{
+            dispatch(setAlert("Error en el servidor", "red"))
+        }
+        dispatch(off_loading());
+
+    }else{
+        dispatch(setAlert("Las contraseñas no coinciden", "red"))
+        dispatch(off_loading());
+    }
+}

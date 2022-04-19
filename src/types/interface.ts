@@ -9,3 +9,10 @@ export interface IFormSignUp {
     password:string
     re_password:string
 }
+export interface IFormResetPass{
+    email:string
+}
+export interface IFormResetPassConfirm{
+    password:string
+    re_password:string
+}
