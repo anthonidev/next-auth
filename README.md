@@ -1,12 +1,12 @@
 # Template
-_Next js, Typescript,Redux-toolkit, Tailwind  `_
+_Next js, Typescript,Redux-toolkit, Tailwind, JWT  `_
 
 ## Instalación 🔧
 
 _step 1_
 
 ```
-git clone https://github.com/anthoni-gmu/Criptografia.git
+git clone https://github.com/anthonidev/next-auth-template-JWT.git
 ```
 
 _step 2_
